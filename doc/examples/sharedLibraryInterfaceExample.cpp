@@ -16,7 +16,7 @@
 
 #include <iostream>
 #include <ale_interface.hpp>
-
+#include <games/RomUtils.hpp>
 #ifdef __USE_SDL
   #include <SDL.h>
 #endif
@@ -43,6 +43,11 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
+    cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
+    ale.romSettings->setMode(3,ale.theOSystem->console().system(),ale.environment);
+    cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
+    ale.reset_game();
+    cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
     // Get the vector of legal actions
     ActionVect legal_actions = ale.getLegalActionSet();
 
@@ -53,6 +58,7 @@ int main(int argc, char** argv) {
             Action a = legal_actions[rand() % legal_actions.size()];
             // Apply the action and get the resulting reward
             float reward = ale.act(a);
+            ale.act(SYSTEM_RESET);
             totalReward += reward;
         }
         cout << "Episode " << episode << " ended with score: " << totalReward << endl;

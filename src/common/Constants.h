@@ -79,6 +79,10 @@ std::string action_to_string(Action a);
 //  Define datatypes
 typedef std::vector<Action> ActionVect;
 
+// Define types for the modes
+typedef unsigned mode_t;
+typedef std::vector<mode_t> ModeVect;
+
 // reward type for RL interface
 typedef int reward_t;
 

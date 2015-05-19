@@ -74,11 +74,13 @@ bool FreewaySettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void FreewaySettings::reset() {
+void FreewaySettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+
+    writeRam(&system,0,m_mode);
 }
         
 /* saves the state of the rom settings */
@@ -95,3 +97,26 @@ void FreewaySettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect FreewaySettings::getAvailableModes(){
+    ModeVect modes(8);
+    for(unsigned i=0;i<8;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void FreewaySettings::setMode(mode_t m,System &system, std::auto_ptr<StellaEnvironment>& environment){
+    if(m>=0 && m<8){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0,m);
+        //reset the environment to apply changes.
+        //environment.reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}

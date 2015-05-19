@@ -38,7 +38,7 @@ class FreewaySettings : public RomSettings {
         FreewaySettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;
@@ -65,6 +65,12 @@ class FreewaySettings : public RomSettings {
         void loadState(Deserializer & ser);
 
         virtual const int lives() { return 0; }
+    
+        //Returns a list of mode that the game can be played in. In this game, there are 8 available modes.
+        ModeVect getAvailableModes();
+
+        //Set the mode of the game. The given mode must be one returned by the previous function. 
+        void setMode(mode_t,System &system,std::auto_ptr<StellaEnvironment>& environment);
 
     private:
 
