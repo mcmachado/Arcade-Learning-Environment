@@ -38,7 +38,7 @@ class AlienSettings : public RomSettings {
         AlienSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

@@ -15,8 +15,10 @@
 
 
 TennisSettings::TennisSettings() {
-
-    reset();
+    m_reward               = 0;
+    m_prev_delta_points    = 0;
+    m_prev_delta_score     = 0;
+    m_terminal             = false;
 }
 
 
@@ -103,7 +105,7 @@ bool TennisSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void TennisSettings::reset() {
+void TennisSettings::reset(System& system) {
     
     m_reward               = 0;
     m_prev_delta_points    = 0;

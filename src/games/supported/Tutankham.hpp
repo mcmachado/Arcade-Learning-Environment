@@ -38,7 +38,7 @@ class TutankhamSettings : public RomSettings {
         TutankhamSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

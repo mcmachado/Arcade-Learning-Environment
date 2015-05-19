@@ -31,7 +31,10 @@
 
 FrostbiteSettings::FrostbiteSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 4;
 }
 
 
@@ -107,7 +110,7 @@ bool FrostbiteSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void FrostbiteSettings::reset() {
+void FrostbiteSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

@@ -15,8 +15,9 @@
 
 
 JourneyEscapeSettings::JourneyEscapeSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -88,7 +89,7 @@ bool JourneyEscapeSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void JourneyEscapeSettings::reset() {
+void JourneyEscapeSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

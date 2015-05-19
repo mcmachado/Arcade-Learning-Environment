@@ -15,6 +15,7 @@
 #include "../RomSettings.hpp"
 
 
+
 /* RL wrapper for Air Raid settings */
 class AirRaidSettings : public RomSettings {
 
@@ -23,7 +24,7 @@ class AirRaidSettings : public RomSettings {
         AirRaidSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

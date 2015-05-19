@@ -38,7 +38,7 @@ class YarsRevengeSettings : public RomSettings {
         YarsRevengeSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

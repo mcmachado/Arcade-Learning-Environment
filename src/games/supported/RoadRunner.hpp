@@ -38,7 +38,7 @@ class RoadRunnerSettings : public RomSettings {
         RoadRunnerSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

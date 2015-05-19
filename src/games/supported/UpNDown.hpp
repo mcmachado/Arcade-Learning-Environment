@@ -38,7 +38,7 @@ class UpNDownSettings : public RomSettings {
         UpNDownSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

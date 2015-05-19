@@ -38,7 +38,7 @@ class DefenderSettings : public RomSettings {
         DefenderSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

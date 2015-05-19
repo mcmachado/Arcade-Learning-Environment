@@ -38,7 +38,7 @@ class KangarooSettings : public RomSettings {
         KangarooSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

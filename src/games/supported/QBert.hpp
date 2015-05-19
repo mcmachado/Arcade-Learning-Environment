@@ -38,7 +38,7 @@ class QBertSettings : public RomSettings {
         QBertSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

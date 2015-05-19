@@ -31,7 +31,10 @@
 
 ZaxxonSettings::ZaxxonSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 5;
 }
 
 
@@ -108,7 +111,7 @@ bool ZaxxonSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void ZaxxonSettings::reset() {
+void ZaxxonSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

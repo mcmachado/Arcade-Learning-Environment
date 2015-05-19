@@ -15,8 +15,9 @@
 
 
 FreewaySettings::FreewaySettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -63,12 +64,12 @@ reward_t FreewaySettings::getReward() const {
 bool FreewaySettings::isMinimal(const Action &a) const {
 
     switch (a) {
-        case PLAYER_A_NOOP:
-        case PLAYER_A_UP:
-        case PLAYER_A_DOWN:
-            return true;
-        default:
-            return false;
+    case PLAYER_A_NOOP:
+    case PLAYER_A_UP:
+    case PLAYER_A_DOWN:
+        return true;
+    default:
+        return false;
     }   
 }
 
@@ -108,13 +109,13 @@ ModeVect FreewaySettings::getAvailableModes(){
 }
 
 //Set the mode of the game. The given mode must be one returned by the previous function. 
-void FreewaySettings::setMode(mode_t m,System &system, std::auto_ptr<StellaEnvironment>& environment){
+void FreewaySettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=0 && m<8){
         m_mode = m;
         //write the new mode in ram
         writeRam(&system,0,m);
         //reset the environment to apply changes.
-        //environment.reset();
+        environment.soft_reset();
     }else{
         throw std::runtime_error("This mode doesn't currently exist for this game");
     }

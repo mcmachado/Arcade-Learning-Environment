@@ -17,7 +17,7 @@
 
 #ifndef __STELLA_ENVIRONMENT_HPP__ 
 #define __STELLA_ENVIRONMENT_HPP__
-
+class StellaEnvironment;
 #include "ale_state.hpp"
 #include "ale_screen.hpp"
 #include "ale_ram.hpp"
@@ -55,7 +55,10 @@ class StellaEnvironment {
       *  number plus the frame skip.
       */
     reward_t act(Action player_a_action, Action player_b_action);
-
+    
+    /** This functions emulates a push on the reset button of the console */
+    void soft_reset();
+    
     /** Returns true once we reach a terminal state */
     bool isTerminal();
 

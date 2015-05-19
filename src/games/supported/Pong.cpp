@@ -15,8 +15,9 @@
 
 
 PongSettings::PongSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -77,7 +78,7 @@ bool PongSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void PongSettings::reset() {
+void PongSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

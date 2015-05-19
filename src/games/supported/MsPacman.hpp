@@ -38,7 +38,7 @@ class MsPacmanSettings : public RomSettings {
         MsPacmanSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

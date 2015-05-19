@@ -70,7 +70,7 @@ class FreewaySettings : public RomSettings {
         ModeVect getAvailableModes();
 
         //Set the mode of the game. The given mode must be one returned by the previous function. 
-        void setMode(mode_t,System &system,std::auto_ptr<StellaEnvironment>& environment);
+        void setMode(mode_t,System &system,StellaEnvironment& environment);
 
     private:
 

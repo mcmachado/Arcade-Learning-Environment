@@ -15,8 +15,9 @@
 
 
 DoubleDunkSettings::DoubleDunkSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -89,7 +90,7 @@ bool DoubleDunkSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void DoubleDunkSettings::reset() {
+void DoubleDunkSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

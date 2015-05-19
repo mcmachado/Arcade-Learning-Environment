@@ -38,7 +38,7 @@ class SkiingSettings : public RomSettings {
         SkiingSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

@@ -16,7 +16,9 @@
 
 BowlingSettings::BowlingSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -75,7 +77,7 @@ bool BowlingSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BowlingSettings::reset() {
+void BowlingSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

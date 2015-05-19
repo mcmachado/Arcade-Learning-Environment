@@ -39,7 +39,7 @@ class RiverRaidSettings : public RomSettings {
         RiverRaidSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

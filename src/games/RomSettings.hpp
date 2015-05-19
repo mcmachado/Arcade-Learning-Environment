@@ -36,11 +36,12 @@
 #include "../common/Constants.h"
 #include "../emucore/Serializer.hxx"
 #include "../emucore/Deserializer.hxx"
+class RomSettings;
+#include "../environment/stella_environment.hpp"
 #include <memory>
 #include <stdexcept>
 
 class System;
-class StellaEnvironment;
 
 // rom support interface
 struct RomSettings {
@@ -96,7 +97,7 @@ struct RomSettings {
     virtual ModeVect getAvailableModes(){ return ModeVect(1,0);};
 
     //Set the mode of the game. The given mode must be one returned by the previous function. 
-    virtual void setMode(mode_t,System &system, std::auto_ptr<StellaEnvironment>& environment);
+    virtual void setMode(mode_t,System &system, StellaEnvironment& environment);
 
 protected:
     mode_t m_mode;

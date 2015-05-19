@@ -31,7 +31,10 @@
 
 PooyanSettings::PooyanSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 3;
 }
 
 
@@ -94,7 +97,7 @@ bool PooyanSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void PooyanSettings::reset() {
+void PooyanSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

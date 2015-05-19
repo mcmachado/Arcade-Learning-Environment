@@ -15,8 +15,9 @@
 
 
 IceHockeySettings::IceHockeySettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -92,7 +93,7 @@ bool IceHockeySettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void IceHockeySettings::reset() {
+void IceHockeySettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

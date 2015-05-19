@@ -31,7 +31,10 @@
 
 KrullSettings::KrullSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 3;
 }
 
 
@@ -106,7 +109,7 @@ bool KrullSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void KrullSettings::reset() {
+void KrullSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

@@ -30,8 +30,12 @@
 
 
 BreakoutSettings::BreakoutSettings() {
-
-    reset();
+    
+    m_reward   = 0;
+    m_score    = 0;
+    m_lives    = 5;
+    m_terminal = false;
+    m_started  = false;
 }
 
 
@@ -94,7 +98,7 @@ bool BreakoutSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BreakoutSettings::reset() {
+void BreakoutSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

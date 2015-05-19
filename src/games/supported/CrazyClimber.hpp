@@ -38,7 +38,7 @@ class CrazyClimberSettings : public RomSettings {
         CrazyClimberSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

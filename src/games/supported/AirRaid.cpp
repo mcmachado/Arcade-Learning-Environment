@@ -15,8 +15,9 @@
 
 
 AirRaidSettings::AirRaidSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -75,7 +76,7 @@ bool AirRaidSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AirRaidSettings::reset() {
+void AirRaidSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

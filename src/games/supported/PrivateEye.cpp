@@ -15,8 +15,9 @@
 
 
 PrivateEyeSettings::PrivateEyeSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 1000;
+    m_terminal = false;
 }
 
 
@@ -89,7 +90,7 @@ bool PrivateEyeSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void PrivateEyeSettings::reset() {
+void PrivateEyeSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 1000;

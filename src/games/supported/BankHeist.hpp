@@ -38,7 +38,7 @@ class BankHeistSettings : public RomSettings {
         BankHeistSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

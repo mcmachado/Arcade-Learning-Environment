@@ -38,7 +38,7 @@ class AsterixSettings : public RomSettings {
         AsterixSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;

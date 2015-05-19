@@ -31,7 +31,10 @@
 
 DefenderSettings::DefenderSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 3;
 }
 
 
@@ -109,7 +112,7 @@ bool DefenderSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void DefenderSettings::reset() {
+void DefenderSettings::reset(System& system) {
     
     m_reward   = 0;
     m_score    = 0;

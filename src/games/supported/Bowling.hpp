@@ -38,7 +38,7 @@ class BowlingSettings : public RomSettings {
         BowlingSettings();
 
         // reset
-        void reset();
+        void reset(System& system);
 
         // is end of game
         bool isTerminal() const;
