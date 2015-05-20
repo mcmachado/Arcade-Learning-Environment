@@ -44,8 +44,8 @@ int main(int argc, char** argv) {
     ale.loadROM(argv[1]);
 
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
-
-    ale.setMode(3);
+   
+    ale.setMode(16);
     
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
 

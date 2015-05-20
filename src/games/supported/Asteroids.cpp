@@ -107,6 +107,7 @@ void AsteroidsSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 4;
+    writeRam(&system,0,m_mode);
 }
 
 
@@ -127,3 +128,26 @@ void AsteroidsSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+//Returns a list of mode that the game can be played in.
+ModeVect AsteroidsSettings::getAvailableModes(){
+    ModeVect modes(32);
+    for(unsigned i=0;i<32;i++){
+        modes[i]=i;
+    }
+    modes.push_back(128);//this is the "kid" mode
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void AsteroidsSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && (m<32||m==128)){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
