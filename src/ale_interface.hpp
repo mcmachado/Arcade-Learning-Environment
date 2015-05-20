@@ -84,6 +84,15 @@ public:
   // Resets the game, but not the full system.
   void reset_game();
 
+  //Returns the vector of modes available for the current game.
+  //This should be called only after the rom is loaded.
+  ModeVect getAvailableModes();
+
+  //Sets the mode of the game.
+  //The mode must be an available mode.
+  //This should be called only after the rom is loaded.
+  void setMode(mode_t m);
+
   // Returns the vector of legal actions. This should be called only
   // after the rom is loaded.
   ActionVect getLegalActionSet();
