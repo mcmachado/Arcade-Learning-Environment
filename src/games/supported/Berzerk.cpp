@@ -35,6 +35,7 @@ BerzerkSettings::BerzerkSettings() {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    m_mode = 1;
 }
 
 
@@ -113,6 +114,7 @@ void BerzerkSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    writeRam(&system,0,m_mode);
 }
 
 
@@ -133,3 +135,27 @@ void BerzerkSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+
+//Returns a list of mode that the game can be played in.
+ModeVect BerzerkSettings::getAvailableModes(){
+    ModeVect modes(12);
+    for(unsigned i=0;i<8;i++){
+        modes[i]=i+1;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void BerzerkSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=1 && m<=12){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
