@@ -35,6 +35,7 @@ BattleZoneSettings::BattleZoneSettings() {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
+    m_mode = 1;
 }
 
 
@@ -126,6 +127,8 @@ void BattleZoneSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
+    writeRam(&system,0xA1,m_mode);
+    writeRam(&system,0xBA,m_mode);
 }
 
 
@@ -146,3 +149,27 @@ void BattleZoneSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect BattleZoneSettings::getAvailableModes(){
+    ModeVect modes(3);
+    for(unsigned i=0;i<3;i++){
+        modes[i]=i+1;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void BattleZoneSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=1 && m<=3){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0xA1,m);
+        writeRam(&system,0xBA,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
