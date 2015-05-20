@@ -118,6 +118,7 @@ void AlienSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    writeRam(&system,1,m_mode);
 }
 
 
@@ -144,3 +145,26 @@ void AlienSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect AlienSettings::getAvailableModes(){
+    ModeVect modes(4);
+    for(unsigned i=0;i<4;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void AlienSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<4){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,1,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}

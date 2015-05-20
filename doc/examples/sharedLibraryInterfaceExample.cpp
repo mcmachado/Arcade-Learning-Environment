@@ -43,9 +43,12 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
+    cout<<readRam(&ale.theOSystem->console().system(),1)<<endl;
+
+    ale.romSettings->setMode(3,ale.theOSystem->console().system(),*(ale.environment.get()));
     
-    ale.romSettings->setMode(2,ale.theOSystem->console().system(),*(ale.environment.get()));
-    
+    cout<<readRam(&ale.theOSystem->console().system(),1)<<endl;
+
     // Get the vector of legal actions
     ActionVect legal_actions = ale.getLegalActionSet();
 
