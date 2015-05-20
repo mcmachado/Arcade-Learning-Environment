@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
    
-    ale.setMode(0);
+    ale.setMode(28);
     
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
 

@@ -112,6 +112,8 @@ void BankHeistSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
+    writeRam(&system,0,m_mode);
+    writeRam(&system,1,m_mode);
 }
 
 
@@ -132,3 +134,27 @@ void BankHeistSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect BankHeistSettings::getAvailableModes(){
+    ModeVect modes(8);
+    for(unsigned i=0;i<8;i++){
+        modes[i]=i*4;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void BankHeistSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<=28 && m%4==0){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0,m);
+        writeRam(&system,1,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
