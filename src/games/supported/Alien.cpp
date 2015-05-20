@@ -117,8 +117,8 @@ void AlienSettings::reset(System& system) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
-    m_lives    = 3;
-    writeRam(&system,1,m_mode);
+    m_lives = 4;
+    writeRam(&system,0x81,m_mode);
 }
 
 
@@ -160,7 +160,7 @@ void AlienSettings::setMode(mode_t m,System &system, StellaEnvironment& environm
     if(m>=0 && m<4){
         m_mode = m;
         //write the new mode in ram
-        writeRam(&system,1,m);
+        writeRam(&system,0x81,m);
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
