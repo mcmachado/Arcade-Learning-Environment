@@ -108,7 +108,7 @@ bool YarsRevengeSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void YarsRevengeSettings::reset(System& system) {
+void YarsRevengeSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

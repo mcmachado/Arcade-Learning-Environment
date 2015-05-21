@@ -94,7 +94,7 @@ bool NameThisGameSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void NameThisGameSettings::reset(System& system) {
+void NameThisGameSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

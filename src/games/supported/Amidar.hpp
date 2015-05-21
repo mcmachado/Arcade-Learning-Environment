@@ -38,7 +38,7 @@ class AmidarSettings : public RomSettings {
         AmidarSettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

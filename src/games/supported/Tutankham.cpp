@@ -101,7 +101,7 @@ bool TutankhamSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void TutankhamSettings::reset(System& system) {
+void TutankhamSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

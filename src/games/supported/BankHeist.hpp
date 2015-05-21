@@ -38,7 +38,7 @@ class BankHeistSettings : public RomSettings {
         BankHeistSettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

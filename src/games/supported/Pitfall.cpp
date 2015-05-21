@@ -111,7 +111,7 @@ bool PitfallSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void PitfallSettings::reset(System& system) {
+void PitfallSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 2000;

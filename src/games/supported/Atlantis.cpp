@@ -95,7 +95,7 @@ bool AtlantisSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AtlantisSettings::reset(System& system) {
+void AtlantisSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

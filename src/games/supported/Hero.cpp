@@ -106,7 +106,7 @@ bool HeroSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void HeroSettings::reset(System& system) {
+void HeroSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

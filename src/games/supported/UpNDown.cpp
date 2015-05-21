@@ -97,7 +97,7 @@ bool UpNDownSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void UpNDownSettings::reset(System& system) {
+void UpNDownSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

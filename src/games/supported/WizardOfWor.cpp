@@ -107,7 +107,7 @@ bool WizardOfWorSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void WizardOfWorSettings::reset(System& system) {
+void WizardOfWorSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

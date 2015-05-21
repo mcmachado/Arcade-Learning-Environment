@@ -76,7 +76,7 @@ bool AirRaidSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AirRaidSettings::reset(System& system) {
+void AirRaidSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

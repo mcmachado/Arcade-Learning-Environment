@@ -98,7 +98,7 @@ bool BreakoutSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BreakoutSettings::reset(System& system) {
+void BreakoutSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

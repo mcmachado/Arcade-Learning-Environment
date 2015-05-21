@@ -113,7 +113,7 @@ bool DefenderSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void DefenderSettings::reset(System& system) {
+void DefenderSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

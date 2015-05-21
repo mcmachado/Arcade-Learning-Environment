@@ -104,7 +104,7 @@ bool VideoPinballSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void VideoPinballSettings::reset(System& system) {
+void VideoPinballSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

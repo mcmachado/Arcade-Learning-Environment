@@ -108,7 +108,7 @@ bool KangarooSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void KangarooSettings::reset(System& system) {
+void KangarooSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

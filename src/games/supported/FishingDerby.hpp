@@ -38,7 +38,7 @@ class FishingDerbySettings : public RomSettings {
         FishingDerbySettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

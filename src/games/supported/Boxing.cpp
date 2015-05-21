@@ -102,7 +102,7 @@ bool BoxingSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BoxingSettings::reset(System& system) {
+void BoxingSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

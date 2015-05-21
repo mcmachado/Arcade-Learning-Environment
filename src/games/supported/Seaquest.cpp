@@ -105,7 +105,7 @@ bool SeaquestSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void SeaquestSettings::reset(System& system) {
+void SeaquestSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

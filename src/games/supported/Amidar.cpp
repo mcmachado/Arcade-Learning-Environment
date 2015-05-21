@@ -101,7 +101,7 @@ bool AmidarSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AmidarSettings::reset(System& system) {
+void AmidarSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

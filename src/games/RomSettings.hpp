@@ -51,7 +51,7 @@ struct RomSettings {
     virtual ~RomSettings() {}
 
     // reset
-    virtual void reset(System& system) = 0;
+    virtual void reset(System& system, StellaEnvironment& environment) = 0;
 
     // is end of game
     virtual bool isTerminal() const = 0;

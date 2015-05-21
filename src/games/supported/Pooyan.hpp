@@ -38,7 +38,7 @@ class PooyanSettings : public RomSettings {
         PooyanSettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

@@ -38,7 +38,7 @@ class MsPacmanSettings : public RomSettings {
         MsPacmanSettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

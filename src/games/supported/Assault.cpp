@@ -93,7 +93,7 @@ bool AssaultSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AssaultSettings::reset(System& system) {
+void AssaultSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

@@ -110,7 +110,7 @@ bool FrostbiteSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void FrostbiteSettings::reset(System& system) {
+void FrostbiteSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

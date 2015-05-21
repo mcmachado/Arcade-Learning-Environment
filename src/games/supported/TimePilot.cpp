@@ -104,7 +104,7 @@ bool TimePilotSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void TimePilotSettings::reset(System& system) {
+void TimePilotSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

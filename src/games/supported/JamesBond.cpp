@@ -112,7 +112,7 @@ bool JamesBondSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void JamesBondSettings::reset(System& system) {
+void JamesBondSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

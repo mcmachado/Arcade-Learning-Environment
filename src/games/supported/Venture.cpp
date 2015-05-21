@@ -111,7 +111,7 @@ bool VentureSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void VentureSettings::reset(System& system) {
+void VentureSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

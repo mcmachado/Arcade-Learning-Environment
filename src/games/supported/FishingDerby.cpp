@@ -92,7 +92,7 @@ bool FishingDerbySettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void FishingDerbySettings::reset(System& system) {
+void FishingDerbySettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

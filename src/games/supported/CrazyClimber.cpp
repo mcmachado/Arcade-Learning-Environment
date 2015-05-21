@@ -102,7 +102,7 @@ bool CrazyClimberSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void CrazyClimberSettings::reset(System& system) {
+void CrazyClimberSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

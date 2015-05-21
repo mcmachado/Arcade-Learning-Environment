@@ -38,7 +38,7 @@ class BattleZoneSettings : public RomSettings {
         BattleZoneSettings();
 
         // reset
-        void reset(System& system);
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;

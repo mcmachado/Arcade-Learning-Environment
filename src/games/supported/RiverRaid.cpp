@@ -138,7 +138,7 @@ bool RiverRaidSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void RiverRaidSettings::reset(System& system) {
+void RiverRaidSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_lives      = 0;
     m_reward     = 0;

@@ -100,7 +100,7 @@ bool AsterixSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void AsterixSettings::reset(System& system) {
+void AsterixSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

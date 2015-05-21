@@ -123,7 +123,7 @@ bool StarGunnerSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void StarGunnerSettings::reset(System& system) {
+void StarGunnerSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

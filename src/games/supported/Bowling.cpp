@@ -77,7 +77,7 @@ bool BowlingSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BowlingSettings::reset(System& system) {
+void BowlingSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

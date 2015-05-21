@@ -105,7 +105,7 @@ bool TennisSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void TennisSettings::reset(System& system) {
+void TennisSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward               = 0;
     m_prev_delta_points    = 0;

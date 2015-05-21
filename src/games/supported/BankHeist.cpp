@@ -106,7 +106,7 @@ bool BankHeistSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void BankHeistSettings::reset(System& system) {
+void BankHeistSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;

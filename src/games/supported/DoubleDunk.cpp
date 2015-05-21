@@ -90,7 +90,7 @@ bool DoubleDunkSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void DoubleDunkSettings::reset(System& system) {
+void DoubleDunkSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
