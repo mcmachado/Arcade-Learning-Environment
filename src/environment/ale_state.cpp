@@ -219,6 +219,13 @@ void ALEState::applyActionPaddles(Event* event, int player_a_action, int player_
   }
 }
 
+
+void ALEState::pressSelect(Event* event)
+{
+    resetKeys(event);
+    event->set(Event::ConsoleSelect,1);
+}
+
 void ALEState::setActionJoysticks(Event* event, int player_a_action, int player_b_action) {
   // Reset keys
   resetKeys(event);
@@ -422,6 +429,7 @@ void ALEState::setActionJoysticks(Event* event, int player_a_action, int player_
  * ***************************************************************************/
 void ALEState::resetKeys(Event* event) {
     event->set(Event::ConsoleReset, 0);
+    event->set(Event::ConsoleSelect,0);
     event->set(Event::JoystickZeroFire, 0);
     event->set(Event::JoystickZeroUp, 0);
     event->set(Event::JoystickZeroDown, 0);

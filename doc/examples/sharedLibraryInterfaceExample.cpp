@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
    
-    ale.setMode(2);
+    //ale.setMode(2);
     cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
 
     RAMFeatures features;
@@ -127,6 +127,27 @@ int main(int argc, char** argv) {
     // Get the vector of legal actions
     ActionVect legal_actions = ale.getLegalActionSet();
 
+    
+    ale.act(PLAYER_A_NOOP);
+    ale.act(PLAYER_A_NOOP);
+    ale.act(PLAYER_A_NOOP);
+    ale.act(PLAYER_A_NOOP);
+    ale.environment->pressSelect(1);
+    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_RIGHT,PLAYER_B_NOOP);
+    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
+    while(1){
+        ale.act(PLAYER_A_NOOP);
+    }
+    ale.act(PLAYER_A_NOOP);
+    ale.act(PLAYER_A_NOOP);
+    getchar();
+    
     // Play 10 episodes
     for (int episode=0; episode<10; episode++) {
         float totalReward = 0;

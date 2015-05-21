@@ -58,6 +58,9 @@ class StellaEnvironment {
     
     /** This functions emulates a push on the reset button of the console */
     void soft_reset();
+
+    /** Keep pressing the console select button for a given amount of time*/
+    void pressSelect(size_t num_steps = 1);
     
     /** Returns true once we reach a terminal state */
     bool isTerminal();

@@ -46,6 +46,9 @@ class ALEState {
 
     void resetPaddles(Event*);
 
+    //Apply the special select action
+    void pressSelect(Event* event_obj);
+    
     /** Applies paddle actions. This actually modifies the game state by updating the paddle
       *  resistances. */
     void applyActionPaddles(Event* event_obj, int player_a_action, int player_b_action);

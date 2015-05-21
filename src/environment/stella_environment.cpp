@@ -190,6 +190,16 @@ bool StellaEnvironment::isTerminal() {
      m_state.getEpisodeFrameNumber() >= m_max_num_frames_per_episode));
 }
 
+void StellaEnvironment::pressSelect(size_t num_steps){
+    Event* event = m_osystem->event();
+    m_state.pressSelect(event);
+    for (size_t t = 0; t < num_steps; t++) {
+        m_osystem->console().mediaSource().update();
+    }
+    processScreen();
+    processRAM();
+}
+
 void StellaEnvironment::emulate(Action player_a_action, Action player_b_action, size_t num_steps) {
   Event* event = m_osystem->event();
   
