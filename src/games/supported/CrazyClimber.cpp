@@ -108,6 +108,7 @@ void CrazyClimberSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
+    writeRam(&system,0,m_mode);
 }
 
         
@@ -127,3 +128,25 @@ void CrazyClimberSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+//Returns a list of mode that the game can be played in.
+ModeVect CrazyClimberSettings::getAvailableModes(){
+    ModeVect modes(4);
+    for(unsigned i=0;i<4;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void CrazyClimberSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<4){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
