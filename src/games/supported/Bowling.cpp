@@ -82,6 +82,7 @@ void BowlingSettings::reset(System& system) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+    writeRam(&system,2,m_mode);
 }
 
 
@@ -100,3 +101,26 @@ void BowlingSettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect BowlingSettings::getAvailableModes(){
+    ModeVect modes;
+    modes.push_back(0);
+    modes.push_back(2);
+    modes.push_back(4);
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void BowlingSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m==0 || m==2 || m==4){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,2,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
