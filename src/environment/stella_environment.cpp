@@ -198,6 +198,7 @@ void StellaEnvironment::pressSelect(size_t num_steps){
     }
     processScreen();
     processRAM();
+    emulate(PLAYER_A_NOOP,PLAYER_B_NOOP);
 }
 
 void StellaEnvironment::emulate(Action player_a_action, Action player_b_action, size_t num_steps) {

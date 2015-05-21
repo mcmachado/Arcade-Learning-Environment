@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
-    ale.setMode(6);
+    ale.setMode(3);
 
     RAMFeatures features;
 	vector<bool> F;
@@ -130,13 +130,15 @@ int main(int argc, char** argv) {
     ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
     ale.environment->pressSelect(1);
+    ale.environment->pressSelect(1);
+    ale.environment->pressSelect(1);
     while(1){
         ale.act(PLAYER_A_NOOP);
     }
     ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
-    getchar();*/
-    
+    getchar();
+    */
     // Play 10 episodes
     for (int episode=0; episode<10; episode++) {
         float totalReward = 0;

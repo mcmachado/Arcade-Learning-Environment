@@ -118,7 +118,7 @@ void AlienSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives = 4;
-    writeRam(&system,0x81,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
@@ -159,8 +159,18 @@ ModeVect AlienSettings::getAvailableModes(){
 void AlienSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=0 && m<4){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0x81,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0x81);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(1);
+            mode = readRam(&system,0x81);
+        }
+        //update the number of lives
+        int byte = readRam(&system, 0xC0);
+        byte = byte & 15;
+        m_lives = byte;
+        cout<<"lives "<<m_lives<<endl;
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
