@@ -114,10 +114,7 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
-    cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
-   
-    //ale.setMode(2);
-    cout<<readRam(&ale.theOSystem->console().system(),0)<<endl;
+    ale.setMode(6);
 
     RAMFeatures features;
 	vector<bool> F;
@@ -128,25 +125,17 @@ int main(int argc, char** argv) {
     ActionVect legal_actions = ale.getLegalActionSet();
 
     
-    ale.act(PLAYER_A_NOOP);
+    /*ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
     ale.environment->pressSelect(1);
-    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_DOWN,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_RIGHT,PLAYER_B_NOOP);
-    ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
     while(1){
         ale.act(PLAYER_A_NOOP);
     }
     ale.act(PLAYER_A_NOOP);
     ale.act(PLAYER_A_NOOP);
-    getchar();
+    getchar();*/
     
     // Play 10 episodes
     for (int episode=0; episode<10; episode++) {
