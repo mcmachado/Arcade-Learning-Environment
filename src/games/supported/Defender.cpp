@@ -35,6 +35,7 @@ DefenderSettings::DefenderSettings() {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    m_mode = 1;
 }
 
 
@@ -118,6 +119,7 @@ void DefenderSettings::reset(System& system) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    writeRam(&system,0x9B,m_mode);
 }
 
         
@@ -137,3 +139,26 @@ void DefenderSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+//Returns a list of mode that the game can be played in.
+ModeVect DefenderSettings::getAvailableModes(){
+    ModeVect modes(9);
+    for(unsigned i=0;i<9;i++){
+        modes[i]=i+1;
+    }
+    modes.push_back(16); //easy mode
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void DefenderSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=1 && (m<=9||m==16)){
+        m_mode = m;
+        //write the new mode in ram
+        writeRam(&system,0x9B,m);
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
