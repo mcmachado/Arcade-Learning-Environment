@@ -95,6 +95,7 @@ void PrivateEyeSettings::reset(System& system, StellaEnvironment& environment) {
     m_reward   = 0;
     m_score    = 1000;
     m_terminal = false;
+    setMode(m_mode,system,environment);
 }
         
 /* saves the state of the rom settings */
@@ -115,4 +116,33 @@ ActionVect PrivateEyeSettings::getStartingActions() {
     ActionVect startingActions;
     startingActions.push_back(PLAYER_A_UP);
     return startingActions;
+}
+
+
+//Returns a list of mode that the game can be played in.
+ModeVect PrivateEyeSettings::getAvailableModes(){
+    ModeVect modes(5);
+    for(unsigned i=0;i<5;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void PrivateEyeSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<5){
+        m_mode = m;
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
 }
