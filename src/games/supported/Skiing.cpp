@@ -18,6 +18,7 @@ SkiingSettings::SkiingSettings() {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+    m_mode = 1;
 }
 
 
@@ -98,6 +99,7 @@ void SkiingSettings::reset(System& system, StellaEnvironment& environment) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+    setMode(m_mode,system,environment);
 }
         
 /* saves the state of the rom settings */
@@ -119,4 +121,37 @@ ActionVect SkiingSettings::getStartingActions() {
     for (int i=0; i<16; i++)
         startingActions.push_back(PLAYER_A_DOWN);
     return startingActions;
+}
+
+
+
+
+//Returns a list of mode that the game can be played in.
+ModeVect SkiingSettings::getAvailableModes(){
+    ModeVect modes(10);
+    for(unsigned i=0;i<10;i++){
+        modes[i]=i+1;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void SkiingSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=1 && m<=10){
+        m_mode = m;
+        //open the mode selection screen
+        environment.pressSelect(2);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xEB);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0xEB);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
 }
