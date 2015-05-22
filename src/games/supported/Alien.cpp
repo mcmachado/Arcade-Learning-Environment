@@ -170,7 +170,6 @@ void AlienSettings::setMode(mode_t m,System &system, StellaEnvironment& environm
         int byte = readRam(&system, 0xC0);
         byte = byte & 15;
         m_lives = byte;
-        cout<<"lives "<<m_lives<<endl;
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{

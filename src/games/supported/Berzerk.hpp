@@ -64,6 +64,7 @@ class BerzerkSettings : public RomSettings {
         // loads the state of the rom settings
         void loadState(Deserializer & ser);
 
+        ActionVect getStartingActions();
         virtual const int lives() { return isTerminal() ? 0 : m_lives; }
 
     

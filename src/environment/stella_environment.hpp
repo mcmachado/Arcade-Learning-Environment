@@ -33,7 +33,7 @@ class StellaEnvironment;
 #define NUM_RANDOM_ENVIRONMENTS (500)
 
 class StellaEnvironment {
-  public:
+public:
     StellaEnvironment(OSystem * system, RomSettings * settings);
 
     /** Resets the system to its start state. */

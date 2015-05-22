@@ -83,6 +83,8 @@ void StellaEnvironment::reset() {
   for (size_t i = 0; i < startingActions.size(); i++){
     emulate(startingActions[i], PLAYER_B_NOOP);
   }
+
+  
 }
 
 /** Save/restore the environment state. */
