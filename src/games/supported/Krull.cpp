@@ -35,6 +35,7 @@ KrullSettings::KrullSettings() {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    m_mode = 1;
 }
 
 
@@ -115,6 +116,7 @@ void KrullSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    setMode(m_mode,system,environment);
 }
 
         
@@ -132,5 +134,38 @@ void KrullSettings::loadState(Deserializer & ser) {
   m_score = ser.getInt();
   m_terminal = ser.getBool();
   m_lives = ser.getInt();
+}
+
+
+
+
+//Returns a list of mode that the game can be played in.
+ModeVect KrullSettings::getAvailableModes(){
+    ModeVect modes(4);
+    for(unsigned i=0;i<4;i++){
+        modes[i]=i+1;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void KrullSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=1 && m<5){
+        m_mode = m;
+        //open the mode selection screen
+        environment.pressSelect(1);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0x9E);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0x9E);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
 }
 
