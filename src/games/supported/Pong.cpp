@@ -83,6 +83,7 @@ void PongSettings::reset(System& system, StellaEnvironment& environment) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+    setMode(m_mode,system,environment);
 }
 
         
@@ -100,3 +101,30 @@ void PongSettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect PongSettings::getAvailableModes(){
+    ModeVect modes;
+    modes.push_back(0);
+    modes.push_back(1);    
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void PongSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m==1 || m==0){
+        m_mode = m;
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0x96);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0x96);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
