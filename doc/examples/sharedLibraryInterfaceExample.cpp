@@ -124,7 +124,6 @@ int main(int argc, char** argv) {
     // Get the vector of legal actions
     ActionVect legal_actions = ale.getLegalActionSet();
 
-
     /*cout<<"coucou"<<endl;
     for(int i=0;i<100;i++)
         ale.environment->act(PLAYER_A_NOOP,PLAYER_B_NOOP);
