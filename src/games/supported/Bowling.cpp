@@ -82,7 +82,7 @@ void BowlingSettings::reset(System& system, StellaEnvironment& environment) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
-    writeRam(&system,2,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
@@ -115,8 +115,13 @@ ModeVect BowlingSettings::getAvailableModes(){
 void BowlingSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m==0 || m==2 || m==4){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,2,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,2);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,2);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
