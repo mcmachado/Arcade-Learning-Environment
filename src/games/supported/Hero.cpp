@@ -162,3 +162,4 @@ void HeroSettings::setMode(mode_t m,System &system, StellaEnvironment& environme
     }
 
 }
+
