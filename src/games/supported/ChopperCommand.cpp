@@ -35,6 +35,7 @@ ChopperCommandSettings::ChopperCommandSettings() {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    m_isStarted = false;
 }
 
 
@@ -59,13 +60,14 @@ void ChopperCommandSettings::step(const System& system) {
     // update terminal status
     m_lives = readRam(&system, 0xE4) & 0xF; 
     m_terminal = (m_lives == 0);
+    m_isStarted = (readRam(&system,0xC2) == 1);
 }
 
 
 /* is end of game */
 bool ChopperCommandSettings::isTerminal() const {
 
-    return m_terminal;
+    return (m_isStarted&&m_terminal);
 };
 
 
@@ -112,7 +114,7 @@ void ChopperCommandSettings::reset(System& system, StellaEnvironment& environmen
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
-    writeRam(&system,0xE0,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
@@ -146,8 +148,13 @@ ModeVect ChopperCommandSettings::getAvailableModes(){
 void ChopperCommandSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m==0 || m==2){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0xE0,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xE0);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0xE0);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{

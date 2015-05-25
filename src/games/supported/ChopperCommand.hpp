@@ -73,7 +73,7 @@ class ChopperCommandSettings : public RomSettings {
         void setMode(mode_t,System &system,StellaEnvironment& environment);
 
     private:
-
+        bool m_isStarted;
         bool m_terminal;
         reward_t m_reward;
         reward_t m_score;
