@@ -135,8 +135,13 @@ ModeVect AtlantisSettings::getAvailableModes(){
 void AtlantisSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=0 && m<4){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0x8D,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0x8D);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0x8D);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
