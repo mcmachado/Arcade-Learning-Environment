@@ -126,3 +126,11 @@ void AmidarSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+DifficultyVect AmidarSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(3);
+    return diff;
+    
+}
