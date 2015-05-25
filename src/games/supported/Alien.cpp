@@ -186,5 +186,4 @@ DifficultyVect AlienSettings::getAvailableDifficulties(){
     diff.push_back(2);
     diff.push_back(3);
     return diff;
-    
 }

@@ -155,3 +155,12 @@ void CrazyClimberSettings::setMode(mode_t m,System &system, StellaEnvironment& e
     }
 
 }
+
+DifficultyVect CrazyClimberSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(2);
+    return diff;
+}
+
+
