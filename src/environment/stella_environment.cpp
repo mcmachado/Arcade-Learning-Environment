@@ -203,6 +203,14 @@ void StellaEnvironment::pressSelect(size_t num_steps){
     emulate(PLAYER_A_NOOP,PLAYER_B_NOOP);
 }
 
+void StellaEnvironment::setDifficultyMode(unsigned mask){
+    Event* event = m_osystem->event();
+    m_state.setDifficultyMode(event,mask);
+    m_osystem->console().mediaSource().update();
+    processScreen();
+    processRAM();
+}
+
 void StellaEnvironment::emulate(Action player_a_action, Action player_b_action, size_t num_steps) {
   Event* event = m_osystem->event();
   

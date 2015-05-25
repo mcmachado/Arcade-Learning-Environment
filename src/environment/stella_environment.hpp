@@ -62,6 +62,11 @@ public:
     /** Keep pressing the console select button for a given amount of time*/
     void pressSelect(size_t num_steps = 1);
     
+    //set the difficulty according to the mask.
+    //If the first bit is 1, then it will put the left difficulty switch to A (otherwise leave it on B)
+    //If the second bit is 1, then it will put the right difficulty switch to A (otherwise leave it on B)
+    void setDifficultyMode(unsigned mask);
+
     /** Returns true once we reach a terminal state */
     bool isTerminal();
 
