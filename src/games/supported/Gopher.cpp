@@ -106,7 +106,7 @@ void GopherSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
-    writeRam(&system,0xD3,m_mode);
+    setMode(m_mode,system,environment);
 }
 
         
@@ -143,8 +143,14 @@ ModeVect GopherSettings::getAvailableModes(){
 void GopherSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m==0 || m==2){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0xD3,m);
+        environment.soft_reset();
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xD3);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(5);
+            mode = readRam(&system,0xD3);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
