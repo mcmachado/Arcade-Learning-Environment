@@ -79,6 +79,8 @@ class DemonAttackSettings : public RomSettings {
         reward_t m_reward;
         reward_t m_score;
         int m_lives;
+
+        bool m_levelChange;
 };
 
 #endif // __DEMONATTACK_HPP__

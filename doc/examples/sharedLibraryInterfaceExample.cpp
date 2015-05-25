@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
-    ale.setMode(16);
+    ale.setMode(7);
 
     RAMFeatures features;
 	vector<bool> F;

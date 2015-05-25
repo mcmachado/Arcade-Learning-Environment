@@ -36,6 +36,7 @@ DemonAttackSettings::DemonAttackSettings() {
     m_terminal = false;
     m_lives    = 4;
     m_mode = 1;
+    m_levelChange = false;
 }
 
 
@@ -63,8 +64,11 @@ void DemonAttackSettings::step(const System& system) {
     // update terminal status
     int lives_displayed = readRam(&system, 0xF2);
     int display_flag = readRam(&system, 0xF1);
-    m_terminal = (lives_displayed == 0) && display_flag == 0xBD;
+    //for terminal checking, we must make sure that we do not detect incorrectly a level change
+    //as a game-over
+    m_terminal = (lives_displayed == 0) && display_flag == 0xBD && !m_levelChange;
     m_lives = lives_displayed + 1; // Once we reach terminal, lives() will correctly return 0
+    m_levelChange = false;
 }
 
 
@@ -106,7 +110,7 @@ void DemonAttackSettings::reset(System& system, StellaEnvironment& environment) 
     m_score    = 0;
     m_terminal = false;
     m_lives    = 4;
-    writeRam(&system,0xEA,m_mode);
+    setMode(m_mode,system,environment);
 }
 
         
@@ -141,10 +145,18 @@ ModeVect DemonAttackSettings::getAvailableModes(){
 void DemonAttackSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=0 && m<8){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0xEA,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xEA);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            m_levelChange = true;
+            environment.pressSelect(1);
+            mode = readRam(&system,0xEA);
+        }
+        m_levelChange= true;
         //reset the environment to apply changes.
         environment.soft_reset();
+        
     }else{
         throw std::runtime_error("This mode doesn't currently exist for this game");
     }
