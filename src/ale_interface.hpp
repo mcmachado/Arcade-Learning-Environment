@@ -89,9 +89,14 @@ public:
   ModeVect getAvailableModes();
 
   //Sets the mode of the game.
-  //The mode must be an available mode.
+  //The mode must be an available mode (otherwise it throws an exception).
   //This should be called only after the rom is loaded.
   void setMode(mode_t m);
+
+  //Sets the difficulty of the game.
+  //The difficulty must be an available mode (otherwise it throws an exception).
+  //This should be called only after the rom is loaded.
+  void setDifficulty(difficulty_t m);
 
   // Returns the vector of legal actions. This should be called only
   // after the rom is loaded.

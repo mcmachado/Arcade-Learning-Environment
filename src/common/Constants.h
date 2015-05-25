@@ -83,6 +83,10 @@ typedef std::vector<Action> ActionVect;
 typedef unsigned mode_t;
 typedef std::vector<mode_t> ModeVect;
 
+// Define types for the difficulties
+typedef unsigned difficulty_t;
+typedef std::vector<difficulty_t> DifficultyVect;
+
 // reward type for RL interface
 typedef int reward_t;
 
