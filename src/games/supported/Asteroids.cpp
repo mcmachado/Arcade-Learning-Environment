@@ -107,7 +107,7 @@ void AsteroidsSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 4;
-    writeRam(&system,0,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 

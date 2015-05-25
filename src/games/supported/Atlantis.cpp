@@ -101,7 +101,7 @@ void AtlantisSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 6;
-    writeRam(&system,0x8D,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
