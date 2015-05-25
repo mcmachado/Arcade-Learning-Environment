@@ -127,8 +127,7 @@ void BattleZoneSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
-    writeRam(&system,0xA1,m_mode);
-    writeRam(&system,0xBA,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
@@ -163,9 +162,13 @@ ModeVect BattleZoneSettings::getAvailableModes(){
 void BattleZoneSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=1 && m<=3){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0xA1,m);
-        writeRam(&system,0xBA,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xA1);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0xA1);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
