@@ -68,6 +68,12 @@ class YarsRevengeSettings : public RomSettings {
         ActionVect getStartingActions();
 
         virtual const int lives() { return isTerminal() ? 0 : m_lives; }
+    
+        //Returns a list of mode that the game can be played in. In this game, there are 4 available modes.
+        ModeVect getAvailableModes();
+
+        //Set the mode of the game. The given mode must be one returned by the previous function. 
+        void setMode(mode_t,System &system,StellaEnvironment& environment);
 
     private:
 
