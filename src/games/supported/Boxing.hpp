@@ -66,6 +66,9 @@ class BoxingSettings : public RomSettings {
 
         virtual const int lives() { return 0; }
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 4 available difficulties.
+        DifficultyVect getAvailableDifficulties();
+    
     private:
 
         bool m_terminal;
