@@ -156,3 +156,11 @@ void AsteroidsSettings::setMode(mode_t m,System &system, StellaEnvironment& envi
     }
 
 }
+
+DifficultyVect AsteroidsSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(3);
+    return diff;
+    
+}
