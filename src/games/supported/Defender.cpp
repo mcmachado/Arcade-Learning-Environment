@@ -119,7 +119,7 @@ void DefenderSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
-    writeRam(&system,0x9B,m_mode);
+    setMode(m_mode,system,environment);
 }
 
         
