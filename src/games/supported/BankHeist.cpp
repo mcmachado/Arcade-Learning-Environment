@@ -112,8 +112,7 @@ void BankHeistSettings::reset(System& system, StellaEnvironment& environment) {
     m_score    = 0;
     m_terminal = false;
     m_lives    = 5;
-    writeRam(&system,0,m_mode);
-    writeRam(&system,1,m_mode);
+    setMode(m_mode,system,environment);
 }
 
 
@@ -148,9 +147,13 @@ ModeVect BankHeistSettings::getAvailableModes(){
 void BankHeistSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=0 && m<=28 && m%4==0){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0,m);
-        writeRam(&system,1,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(1);
+            mode = readRam(&system,0);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
