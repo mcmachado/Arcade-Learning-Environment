@@ -72,6 +72,9 @@ class AlienSettings : public RomSettings {
         //Set the mode of the game. The given mode must be one returned by the previous function. 
         void setMode(mode_t,System &system,StellaEnvironment& environment);
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 4 available difficulties.
+        DifficultyVect getAvailableDifficulties();
+    
     private:
 
         // special code to read digits for Alien
