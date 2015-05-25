@@ -161,3 +161,14 @@ void BankHeistSettings::setMode(mode_t m,System &system, StellaEnvironment& envi
     }
 
 }
+
+
+DifficultyVect BankHeistSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    diff.push_back(2);
+    diff.push_back(3);
+    return diff;
+    
+}

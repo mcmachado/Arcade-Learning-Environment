@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
     // take effect.)
     ale.loadROM(argv[1]);
 
-    ale.setMode(1);
+    //ale.setMode(1);
     ale.setDifficulty(3);
     
     RAMFeatures features;
