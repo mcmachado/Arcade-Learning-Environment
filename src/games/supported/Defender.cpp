@@ -153,8 +153,13 @@ ModeVect DefenderSettings::getAvailableModes(){
 void DefenderSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
     if(m>=1 && (m<=9||m==16)){
         m_mode = m;
-        //write the new mode in ram
-        writeRam(&system,0x9B,m);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0x9B);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(2);
+            mode = readRam(&system,0x9B);
+        }
         //reset the environment to apply changes.
         environment.soft_reset();
     }else{
