@@ -130,3 +130,10 @@ void SeaquestSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+DifficultyVect SeaquestSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(2);
+    return diff;
+}
