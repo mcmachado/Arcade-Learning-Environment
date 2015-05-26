@@ -163,3 +163,10 @@ void RiverRaidSettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
   m_lives_byte = ser.getInt();
 }
+
+DifficultyVect RiverRaidSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(2);
+    return diff;
+}
