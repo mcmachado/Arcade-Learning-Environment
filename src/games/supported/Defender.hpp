@@ -73,6 +73,9 @@ class DefenderSettings : public RomSettings {
         void setMode(mode_t,System &system,StellaEnvironment& environment);
 
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 2 available difficulties.
+        DifficultyVect getAvailableDifficulties();
+    
 
     private:
 

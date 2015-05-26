@@ -167,3 +167,10 @@ void DefenderSettings::setMode(mode_t m,System &system, StellaEnvironment& envir
     }
 
 }
+
+DifficultyVect DefenderSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(2);
+    return diff;
+}
