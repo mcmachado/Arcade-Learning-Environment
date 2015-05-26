@@ -143,7 +143,7 @@ ModeVect DemonAttackSettings::getAvailableModes(){
 
 //Set the mode of the game. The given mode must be one returned by the previous function. 
 void DemonAttackSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
-    if(m>=0 && m<8){
+    if(m==1 || m==3 || m==5 || m==7){
         m_mode = m;
         //Read the mode we are currently in
         unsigned char mode = readRam(&system,0xEA);
