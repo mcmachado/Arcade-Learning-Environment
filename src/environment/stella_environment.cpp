@@ -26,7 +26,9 @@ StellaEnvironment::StellaEnvironment(OSystem* osystem, RomSettings* settings):
   m_screen(m_osystem->console().mediaSource().height(),
         m_osystem->console().mediaSource().width()),
   m_player_a_action(PLAYER_A_NOOP),
-  m_player_b_action(PLAYER_B_NOOP) {
+  m_player_b_action(PLAYER_B_NOOP),
+  m_difficulty(0)
+{
 
   // Determine whether this is a paddle-based game
   if (m_osystem->console().properties().get(Controller_Left) == "PADDLES" ||
@@ -83,6 +85,7 @@ void StellaEnvironment::reset() {
   for (size_t i = 0; i < startingActions.size(); i++){
     emulate(startingActions[i], PLAYER_B_NOOP);
   }
+  setDifficulty(m_difficulty);
 
   
 }
@@ -203,12 +206,13 @@ void StellaEnvironment::pressSelect(size_t num_steps){
     emulate(PLAYER_A_NOOP,PLAYER_B_NOOP);
 }
 
-void StellaEnvironment::setDifficulty(unsigned mask){
+void StellaEnvironment::setDifficulty(difficulty_t mask){
     Event* event = m_osystem->event();
     m_state.setDifficulty(event,mask);
     m_osystem->console().mediaSource().update();
     processScreen();
     processRAM();
+    m_difficulty = mask;
 }
 
 void StellaEnvironment::emulate(Action player_a_action, Action player_b_action, size_t num_steps) {

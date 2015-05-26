@@ -65,7 +65,7 @@ public:
     //set the difficulty according to the mask.
     //If the first bit is 1, then it will put the left difficulty switch to A (otherwise leave it on B)
     //If the second bit is 1, then it will put the right difficulty switch to A (otherwise leave it on B)
-    void setDifficulty(unsigned mask);
+    void setDifficulty(difficulty_t mask);
 
     /** Returns true once we reach a terminal state */
     bool isTerminal();
@@ -121,6 +121,9 @@ public:
     
     // The last actions taken by our players
     Action m_player_a_action, m_player_b_action;
+
+    //The current difficulty we are in
+    difficulty_t m_difficulty;
 };
 
 #endif // __STELLA_ENVIRONMENT_HPP__
