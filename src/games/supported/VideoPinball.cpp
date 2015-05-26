@@ -156,3 +156,10 @@ void VideoPinballSettings::setMode(mode_t m,System &system, StellaEnvironment& e
     }
 
 }
+
+DifficultyVect VideoPinballSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
+}
