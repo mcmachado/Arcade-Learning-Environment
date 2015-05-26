@@ -142,7 +142,7 @@ void QBertSettings::loadState(Deserializer & ser) {
 DifficultyVect QBertSettings::getAvailableDifficulties(){
     DifficultyVect diff;
     diff.push_back(0);
-    diff.push_back(2);
+    diff.push_back(1);
     return diff;
 }
 
