@@ -72,6 +72,8 @@ class SpaceInvadersSettings : public RomSettings {
         //Set the mode of the game. The given mode must be one returned by the previous function. 
         void setMode(mode_t,System &system,StellaEnvironment& environment);
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 2 available difficulties.
+        DifficultyVect getAvailableDifficulties();
     private:
 
         bool m_terminal;
