@@ -169,3 +169,12 @@ void YarsRevengeSettings::setMode(mode_t m,System &system, StellaEnvironment& en
     }
 
 }
+
+
+DifficultyVect YarsRevengeSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
+}
+
