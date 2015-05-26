@@ -128,3 +128,11 @@ void TimePilotSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+DifficultyVect TimePilotSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    diff.push_back(2);
+    return diff;
+}
