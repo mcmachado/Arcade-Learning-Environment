@@ -132,3 +132,11 @@ void WizardOfWorSettings::loadState(Deserializer & ser) {
   m_lives = ser.getInt();
 }
 
+
+DifficultyVect WizardOfWorSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
+}
+
