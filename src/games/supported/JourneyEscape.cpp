@@ -118,3 +118,10 @@ ActionVect JourneyEscapeSettings::getStartingActions() {
 }
 
 
+
+DifficultyVect JourneyEscapeSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(2);
+    return diff;
+}
