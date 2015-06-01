@@ -17,6 +17,10 @@
  */
 #include "RomSettings.hpp"
 
+RomSettings::RomSettings() : m_mode(0)
+{
+}
+
 bool RomSettings::isLegal(const Action& a) const {
   return true;
 }
@@ -43,4 +47,13 @@ ActionVect RomSettings::getAllActions() {
 
 ActionVect RomSettings::getStartingActions() {
     return ActionVect();
+}
+
+
+void RomSettings::setMode(mode_t m,System&,StellaEnvironment&){
+    //By default, 0 is the only available mode
+    if(m!=0){
+        throw std::runtime_error("This mode is not currently available for this game");
+    }
+        
 }

@@ -15,8 +15,9 @@
 
 
 FreewaySettings::FreewaySettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
 }
 
 
@@ -63,22 +64,23 @@ reward_t FreewaySettings::getReward() const {
 bool FreewaySettings::isMinimal(const Action &a) const {
 
     switch (a) {
-        case PLAYER_A_NOOP:
-        case PLAYER_A_UP:
-        case PLAYER_A_DOWN:
-            return true;
-        default:
-            return false;
+    case PLAYER_A_NOOP:
+    case PLAYER_A_UP:
+    case PLAYER_A_DOWN:
+        return true;
+    default:
+        return false;
     }   
 }
 
 
 /* reset the state of the game */
-void FreewaySettings::reset() {
+void FreewaySettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
+    setMode(m_mode,system,environment);
 }
         
 /* saves the state of the rom settings */
@@ -95,3 +97,38 @@ void FreewaySettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
 }
 
+
+//Returns a list of mode that the game can be played in.
+ModeVect FreewaySettings::getAvailableModes(){
+    ModeVect modes(8);
+    for(unsigned i=0;i<8;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void FreewaySettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<8){
+        m_mode = m;
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(1);
+            mode = readRam(&system,0);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
+
+DifficultyVect FreewaySettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
+}

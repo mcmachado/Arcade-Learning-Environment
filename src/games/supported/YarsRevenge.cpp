@@ -31,7 +31,10 @@
 
 YarsRevengeSettings::YarsRevengeSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 4;
 }
 
 
@@ -105,12 +108,13 @@ bool YarsRevengeSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void YarsRevengeSettings::reset() {
+void YarsRevengeSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
     m_lives    = 4;
+    setMode(m_mode,system,environment);
 }
         
 /* saves the state of the rom settings */
@@ -134,3 +138,43 @@ ActionVect YarsRevengeSettings::getStartingActions() {
     startingActions.push_back(PLAYER_A_FIRE);
     return startingActions;
 }
+
+//Returns a list of mode that the game can be played in.
+ModeVect YarsRevengeSettings::getAvailableModes(){
+    ModeVect modes;
+    modes.push_back(0);
+    modes.push_back(0x20);
+    modes.push_back(0x40);
+    modes.push_back(0x60);
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void YarsRevengeSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m==0 || m==0x20 || m==0x40 || m==0x60 ){
+        m_mode = m;
+        //Enter in mode selection screen
+        environment.pressSelect(2);
+        //Read the mode we are currently in
+        unsigned char mode = readRam(&system,0xE3);
+        //press select until the correct mode is reached
+        while(mode!=m_mode){
+            environment.pressSelect(1);
+            mode = readRam(&system,0xE3);
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
+}
+
+
+DifficultyVect YarsRevengeSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
+}
+

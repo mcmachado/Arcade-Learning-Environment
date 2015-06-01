@@ -21,7 +21,7 @@
 #include "../emucore/OSystem.hxx"
 #include "../emucore/Event.hxx"
 #include <string>
-#include "../games/RomSettings.hpp"
+class RomSettings;
 
 #define PADDLE_DELTA 23000
 // MGB Values taken from Paddles.cxx (Stella 3.3) - 1400000 * [5,235] / 255
@@ -46,6 +46,14 @@ class ALEState {
 
     void resetPaddles(Event*);
 
+    //Apply the special select action
+    void pressSelect(Event* event_obj);
+
+    //set the difficulty according to the mask.
+    //If the first bit is 1, then it will put the left difficulty switch to A (otherwise leave it on B)
+    //If the second bit is 1, then it will put the right difficulty switch to A (otherwise leave it on B)
+    void setDifficulty(Event* event_obj,unsigned mask);
+    
     /** Applies paddle actions. This actually modifies the game state by updating the paddle
       *  resistances. */
     void applyActionPaddles(Event* event_obj, int player_a_action, int player_b_action);
@@ -98,6 +106,7 @@ class ALEState {
 
 };
 
+#include "../games/RomSettings.hpp"
 #endif // __ALE_STATE_HPP__
 
 

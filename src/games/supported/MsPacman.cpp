@@ -31,7 +31,10 @@
 
 MsPacmanSettings::MsPacmanSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 3;
 }
 
 
@@ -98,12 +101,13 @@ bool MsPacmanSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void MsPacmanSettings::reset() {
+void MsPacmanSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
     m_lives    = 3;
+    setMode(m_mode,system,environment);
 }
 
 
@@ -122,5 +126,50 @@ void MsPacmanSettings::loadState(Deserializer & ser) {
   m_score = ser.getInt();
   m_terminal = ser.getBool();
   m_lives = ser.getInt();
+}
+
+
+//Returns a list of mode that the game can be played in.
+ModeVect MsPacmanSettings::getAvailableModes(){
+    ModeVect modes(4);
+    for(unsigned i=0;i<4;i++){
+        modes[i]=i;
+    }
+    return modes;
+}
+
+//Set the mode of the game. The given mode must be one returned by the previous function. 
+void MsPacmanSettings::setMode(mode_t m,System &system, StellaEnvironment& environment){
+    if(m>=0 && m<4){
+        m_mode = m;
+        if(m == 0){ //this is the standard variation of the game
+            //Read the mode we are currently in
+            unsigned char mode = readRam(&system,0x99);
+            //Read the variation
+            unsigned char var = readRam(&system,0xA1);
+            //press select until the correct mode is reached
+            while(mode!=1 || var!=1){
+                environment.pressSelect(10);
+                mode = readRam(&system,0x99);
+                var = readRam(&system,0xA1);
+            }
+        }else{
+            //Read the mode we are currently in
+            unsigned char mode = readRam(&system,0x99);
+            //Read the variation
+            unsigned char var = readRam(&system,0xA1);
+            //press select until the correct mode is reached
+            while(mode!=m || var!=0){
+                environment.pressSelect(10);
+                mode = readRam(&system,0x99);
+                var = readRam(&system,0xA1);
+            }
+        }
+        //reset the environment to apply changes.
+        environment.soft_reset();
+    }else{
+        throw std::runtime_error("This mode doesn't currently exist for this game");
+    }
+
 }
 

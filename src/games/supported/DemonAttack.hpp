@@ -38,7 +38,7 @@ class DemonAttackSettings : public RomSettings {
         DemonAttackSettings();
 
         // reset
-        void reset();
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;
@@ -65,6 +65,15 @@ class DemonAttackSettings : public RomSettings {
         void loadState(Deserializer & ser);
 
         virtual const int lives() { return isTerminal() ? 0 : m_lives; }
+    
+        //Returns a list of mode that the game can be played in. In this game, there are 4 available modes.
+        ModeVect getAvailableModes();
+
+        //Set the mode of the game. The given mode must be one returned by the previous function. 
+        void setMode(mode_t,System &system,StellaEnvironment& environment);
+
+        //Returns a list of difficulties that the game can be played in. In this game, there are 2 available difficulties.
+        DifficultyVect getAvailableDifficulties();
 
     private:
 
@@ -72,6 +81,8 @@ class DemonAttackSettings : public RomSettings {
         reward_t m_reward;
         reward_t m_score;
         int m_lives;
+
+        bool m_levelChange;
 };
 
 #endif // __DEMONATTACK_HPP__

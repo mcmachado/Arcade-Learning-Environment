@@ -36,16 +36,22 @@
 #include "../common/Constants.h"
 #include "../emucore/Serializer.hxx"
 #include "../emucore/Deserializer.hxx"
+class RomSettings;
+#include "../environment/stella_environment.hpp"
+#include <memory>
+#include <stdexcept>
 
 class System;
 
-
 // rom support interface
 struct RomSettings {
+
+    RomSettings();
+    
     virtual ~RomSettings() {}
 
     // reset
-    virtual void reset() = 0;
+    virtual void reset(System& system, StellaEnvironment& environment) = 0;
 
     // is end of game
     virtual bool isTerminal() const = 0;
@@ -86,6 +92,18 @@ struct RomSettings {
     // Returns a list of actions that are required to start the game.
     // By default this is an empty list.
     virtual ActionVect getStartingActions();
+
+    //Returns a list of mode that the game can be played in. By default, there is only one available mode.
+    virtual ModeVect getAvailableModes(){ return ModeVect(1,0);};
+
+    //Set the mode of the game. The given mode must be one returned by the previous function. 
+    virtual void setMode(mode_t,System &system, StellaEnvironment& environment);
+
+    //Returns a list of difficulties that the game can be played in. By default, there is only one available difficulty.
+    virtual DifficultyVect getAvailableDifficulties(){ return DifficultyVect(1,0);}
+
+protected:
+    mode_t m_mode;
 };
 
 

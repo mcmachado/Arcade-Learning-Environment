@@ -38,7 +38,7 @@ class JourneyEscapeSettings : public RomSettings {
         JourneyEscapeSettings();
 
         // reset
-        void reset();
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;
@@ -69,6 +69,8 @@ class JourneyEscapeSettings : public RomSettings {
 
         virtual const int lives() { return 0; }
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 2 available difficulties.
+        DifficultyVect getAvailableDifficulties();
     private:
 
         bool m_terminal;

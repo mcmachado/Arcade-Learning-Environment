@@ -31,7 +31,10 @@
 
 WizardOfWorSettings::WizardOfWorSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 3;
 }
 
 
@@ -104,7 +107,7 @@ bool WizardOfWorSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void WizardOfWorSettings::reset() {
+void WizardOfWorSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
@@ -127,5 +130,13 @@ void WizardOfWorSettings::loadState(Deserializer & ser) {
   m_score = ser.getInt();
   m_terminal = ser.getBool();
   m_lives = ser.getInt();
+}
+
+
+DifficultyVect WizardOfWorSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
 }
 

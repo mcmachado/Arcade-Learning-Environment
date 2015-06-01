@@ -30,8 +30,12 @@
 
 
 QBertSettings::QBertSettings() {
-
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    // Anything non-0xFF
+    m_last_lives = 2;
+    m_lives    = 4;
 }
 
 
@@ -106,7 +110,7 @@ bool QBertSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void QBertSettings::reset() {
+void QBertSettings::reset(System& system, StellaEnvironment& environment) {
     m_reward   = 0;
     m_score    = 0;
     m_terminal = false;
@@ -131,5 +135,14 @@ void QBertSettings::loadState(Deserializer & ser) {
   m_terminal = ser.getBool();
   m_last_lives = ser.getInt();
   m_lives = ser.getInt();
+}
+
+
+
+DifficultyVect QBertSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    return diff;
 }
 

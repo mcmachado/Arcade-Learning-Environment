@@ -39,7 +39,7 @@ class RiverRaidSettings : public RomSettings {
         RiverRaidSettings();
 
         // reset
-        void reset();
+        void reset(System& system, StellaEnvironment& environment);
 
         // is end of game
         bool isTerminal() const;
@@ -67,6 +67,8 @@ class RiverRaidSettings : public RomSettings {
 
         virtual const int lives() { return isTerminal() ? 0 : numericLives(); } 
 
+        //Returns a list of difficulties that the game can be played in. In this game, there are 2 available difficulties.
+        DifficultyVect getAvailableDifficulties();
     private:
 
         /** Necessary because Riverraid stores its lives in a very strange format */

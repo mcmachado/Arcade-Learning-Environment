@@ -31,7 +31,10 @@
 
 UpNDownSettings::UpNDownSettings() {
 
-    reset();
+    m_reward   = 0;
+    m_score    = 0;
+    m_terminal = false;
+    m_lives    = 5;
 }
 
 
@@ -94,7 +97,7 @@ bool UpNDownSettings::isMinimal(const Action &a) const {
 
 
 /* reset the state of the game */
-void UpNDownSettings::reset() {
+void UpNDownSettings::reset(System& system, StellaEnvironment& environment) {
     
     m_reward   = 0;
     m_score    = 0;
@@ -122,6 +125,15 @@ ActionVect UpNDownSettings::getStartingActions() {
     ActionVect startingActions;
     startingActions.push_back(PLAYER_A_FIRE);
     return startingActions;
+}
+
+DifficultyVect UpNDownSettings::getAvailableDifficulties(){
+    DifficultyVect diff;
+    diff.push_back(0);
+    diff.push_back(1);
+    diff.push_back(2);
+    diff.push_back(3);
+    return diff;
 }
 
 
